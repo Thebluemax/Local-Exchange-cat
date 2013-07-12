@@ -69,7 +69,7 @@ $headers .= 'Content-type: text/html; charset=utf-8' . "\r\n";
 $headers .= "Reply-To: ".$to. "\r\n";
    // $smtp = Mail::factory('mail');
   //  $mailed = $smtp->send($to, $headers, $body);
-  $mailed=mail($to,$values["email"], $html,$headers);
+  $mailed=mail($to,$values["email"], $text,$headers);
    // if (PEAR::isError($mailed)) {
    if (!$mailed) {
         $output = "Hi ha hagut un problema enviant el teu email. Prem 'Enrere' en el teu navegador i comprova que has escrit l'adreça de correu electrònic correctament.";                                                         
