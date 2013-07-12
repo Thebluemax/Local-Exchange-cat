@@ -62,12 +62,16 @@ function process_data ($values) {
     $mime = new Mail_mime($crlf);
     $mime->setTXTBody($text);
     $body = $mime->get();
-    $headers = $mime->headers($headers);
-    
-    $smtp = Mail::factory('mail');
-    $mailed = $smtp->send($to, $headers, $body);
-
-    if (PEAR::isError($mailed)) {
+  //  $headers = $mime->headers($headers);
+     $headers  = 'MIME-Version: 1.0' . "\r\n";
+$headers .= 'Content-type: text/html; charset=utf-8' . "\r\n";
+             $headers .= "From: noreplyt@tubanc.org \r\n";
+$headers .= "Reply-To: ".$to. "\r\n";
+   // $smtp = Mail::factory('mail');
+  //  $mailed = $smtp->send($to, $headers, $body);
+  $mailed=mail($to,NEW_MEMBER_SUBJECT, $html,$headers);
+   // if (PEAR::isError($mailed)) {
+   if (!$mailed) {
         $output = "Hi ha hagut un problema enviant el teu email. Prem 'Enrere' en el teu navegador i comprova que has escrit l'adreça de correu electrònic correctament.";                                                         
     } else {
         $output = "Gràcies, s'ha enviat el teu correu."; 
