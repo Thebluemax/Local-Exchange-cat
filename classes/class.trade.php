@@ -120,17 +120,15 @@ class cTrade {
 		}	
 
 		// NOTE: Need table type InnoDB to do the following transaction-style statements.		
-		$cDB->Query("SET AUTOCOMMIT=0");
 		
-		$cDB->Query("BEGIN");
 		
 		if($this->SaveTrade()) {
-			$success1 = $this->member_from->UpdateBalance(-($this->amount));
-			if($success1){
+			$success1 = $this->member_from->UpdateMultiBalance(-($this->amount));
+	
 
-			$success2 = $this->member_to->UpdateBalance($this->amount);
-				}
-				//echo $success1."--".$success2."--".$this->amount;
+			$success2 = $this->member_to->UpdateMultiBalance($this->amount);
+			//instruccion para testeo.	
+			//echo $success1."--".$success2."--".$this->amount;
 
 			
 			if(LOG_LEVEL > 0 and $this->type != TRADE_ENTRY) {//Log if enabled & not an ordinary trade
@@ -147,15 +145,13 @@ class cTrade {
 			}
 
 			if($success1 and $success2 and $success3 and $success4) {
-				$cDB->Query('COMMIT');
-				$cDB->Query("SET AUTOCOMMIT=1"); // Probably isn't necessary...
+				; // Probably isn't necessary...
                 
-                $this->member_from->Limites();
-                $this->member_to->Limites();   
+             //   $this->member_from->Limites();
+              //  $this->member_to->Limites();   
 				return true;
 			} else {
-				$cDB->Query('ROLLBACK');
-				$cDB->Query("SET AUTOCOMMIT=1"); // Probably isn't necessary...
+				; // Probably isn't necessary...
 				return false;
 			}
 		} else {

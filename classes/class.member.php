@@ -330,7 +330,26 @@ class cMember
 						
 		return $output;
 	}		
-	
+	function UpdateMultiBalance($amount) {
+		global $cDB;
+		
+		$cDB->Query("SET AUTOCOMMIT=0;");
+		
+		$cDB->Query("BEGIN;");
+		//$this->balance += $amount;
+		//return $this->SaveMember();
+		$update = $cDB->Query("UPDATE ".DATABASE_MEMBERS." SET balance= balance+".$amount." WHERE member_id='".$this->member_id."' ;");
+		
+		if($update){
+				
+				$cDB->Query('COMMIT;');
+				$cDB->Query("SET AUTOCOMMIT=1;");
+			}else{
+				$cDB->Query('ROLLBACK');
+				$cDB->Query("SET AUTOCOMMIT=1");
+			}
+		return $update;
+			}
 	function UpdateBalance($amount) {
 		$this->balance += $amount;
 		return $this->SaveMember();
