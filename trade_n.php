@@ -105,8 +105,6 @@ if(UNITS == "Horas") {
 	$form->registerRule('verify_valid_units','function','verify_valid_units');
 	$form->addRule('units', 'Introdueix un nombre positiu amb no més de dos punts decimals', 'verify_valid_units');
 }
-
-
 //
 // Then check if we are processing a submission or just displaying the form
 //
