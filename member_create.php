@@ -32,6 +32,7 @@ $form->addElement("static", null, null, null);
 $form->addElement("text", "first_name", "Nom", array("size" => 15, "maxlength" => 20));
 $form->addElement("text", "last_name", "Primer Cognom", array("size" => 20, "maxlength" => 30));
 $form->addElement("text", "mid_name", "Segon Cognom", array("size" => 10, "maxlength" => 20));
+$form->addElement("select", "sexo", "Sexo", array(""=>"", "M"=>"Masculí", "F"=>"Femení", "O"=>"Organització"));
 $form->addElement("static", null, null, null); 
 
 $options = array("language"=> "ca", "format" => "dFY", "maxYear"=>$today["year"], "minYear"=>"1880"); 
