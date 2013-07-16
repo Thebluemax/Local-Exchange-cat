@@ -1,3 +1,4 @@
+
 <?
 
 include_once("includes/inc.global.php");
