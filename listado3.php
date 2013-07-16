@@ -14,7 +14,7 @@ $list = "";
 //			$list.="<a href=mailto:".$row[0].">".$row[0]."</a><br>";
 		}
 if (strlen($list)==0) {
-	$list="No se encontraron datos, puto";
+	$list="No se encontraron datos";
 }
 $p->DisplayPage($list);		
 ?>
